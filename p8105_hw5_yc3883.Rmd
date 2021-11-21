@@ -161,7 +161,7 @@ read_function = function(file) {
 
 2. Tidy the result; manipulate file names to include control arm and subject ID, make sure weekly observations are “tidy”, and do any other tidying that’s necessary
 
-```{r}
+```{r, warning = FALSE}
 arm_df = 
   tibble(
     name = list.files("./data/hw5_data/")
@@ -171,7 +171,7 @@ arm_df =
   ) 
 
 arm_df %>% 
-  unnest() %>% 
+  unnest(data) %>% 
   mutate(
     week = as.numeric(week),
     id = str_remove(name, ".csv"),
@@ -179,8 +179,18 @@ arm_df %>%
                          str_detect(name, "exp") ~ "experimental")
   ) %>% 
   select(-name) %>% 
-  relocate(id, arm_type)
+  relocate(id, arm_type) %>% 
+  ggplot(aes(x = week, y = observation, color = id)) +
+  geom_line() +
+  facet_grid(. ~ arm_type) +
+  labs(
+    title = "Observations on Each Subject Over Time",
+    y = "Observation",
+    x = "Week"
+  )
 ```
+Overall, the experimental group has a higher value for observation than control group. Also, the values of observation for experimental group show a increasing trend from week 1 to week 8. The values of observation for control group do not show evident increased or decreased trend from week 1 to week 8.
+
 
 # Problem 3
 Load the "iris" dataset 
