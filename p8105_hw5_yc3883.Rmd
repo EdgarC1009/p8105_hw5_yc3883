@@ -29,7 +29,7 @@ theme_set(theme_minimal() + theme(legend.position = "bottom"))
 ```
  
 # Problem 1
-clean the data
+Clean the data.
 
 ```{r}
 homicide_df = 
@@ -47,7 +47,7 @@ homicide_df =
   filter(city_state != "TulsaAL")
 ```
 
-Lets focus on Baltimore
+Let's focus on Baltimore
 
 ```{r}
 baltimore_df = 
@@ -72,9 +72,9 @@ baltimore_test %>%
 ```
 
 
-Let's try to iterate across cities
+Let's try to iterate across cities.
 
-first off, write a function and test it on few sample city
+First, write a function and test it on few sample city
 
 ```{r}
 prop_test_function = function(city_df) {
@@ -104,7 +104,7 @@ homicide_df %>%
 
 ```
 
-now, lets iterate across all cities
+Now, let's iterate across all cities
 
 ```{r}
 results_df = 
@@ -122,7 +122,7 @@ results_df =
 
 ```
 
-try to make a plot showing estimates and confidence intervals
+Try to make a plot showing estimates and confidence intervals
 
 ```{r}
 results_df %>% 
@@ -161,7 +161,7 @@ read_function = function(file) {
 
 2. Tidy the result; manipulate file names to include control arm and subject ID, make sure weekly observations are “tidy”, and do any other tidying that’s necessary
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, message = FALSE}
 arm_df = 
   tibble(
     name = list.files("./data/hw5_data/")
@@ -189,6 +189,7 @@ arm_df %>%
     x = "Week"
   )
 ```
+
 Overall, the experimental group has a higher value for observation than control group. Also, the values of observation for experimental group show a increasing trend from week 1 to week 8. The values of observation for control group do not show evident increased or decreased trend from week 1 to week 8.
 
 
